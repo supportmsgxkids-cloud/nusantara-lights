@@ -1,6 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ComingSoon } from "@/components/layout/ComingSoon";
+import { NextPrayerCard } from "@/components/ibadah/NextPrayerCard";
+import { IbadahTools } from "@/components/ibadah/IbadahTools";
+import { PrayerSchedule } from "@/components/ibadah/PrayerSchedule";
+import { QuranContinue } from "@/components/ibadah/QuranContinue";
+import { MutabaahHarian } from "@/components/ibadah/MutabaahHarian";
+import { DoaHariIni } from "@/components/ibadah/DoaHariIni";
 
 export const Route = createFileRoute("/_app/ibadah")({
-  component: () => <ComingSoon title="Ibadah & Mutabaah" description="Al-Quran, jadwal sholat, tasbih, dan habit tracker harian." />,
+  component: IbadahPage,
 });
+
+function IbadahPage() {
+  return (
+    <>
+      <NextPrayerCard />
+      <IbadahTools />
+      <PrayerSchedule />
+      <QuranContinue />
+      <MutabaahHarian />
+      <DoaHariIni />
+    </>
+  );
+}
