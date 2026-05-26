@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { BookMarked, Compass, CircleDot, Sparkles } from "lucide-react";
 
 const tools = [
-  { to: "/ibadah", label: "Al-Quran", icon: BookMarked, bg: "bg-primary-50", color: "text-primary-900" },
+  { to: "/quran", label: "Al-Quran", icon: BookMarked, bg: "bg-primary-50", color: "text-primary-900" },
   { to: "/tasbih", label: "Tasbih", icon: CircleDot, bg: "bg-gold-50", color: "text-gold-700" },
   { to: "/ibadah", label: "Arah Kiblat", icon: Compass, bg: "bg-primary-50", color: "text-primary-900" },
   { to: "/ibadah", label: "Dzikir", icon: Sparkles, bg: "bg-gold-50", color: "text-gold-700" },

@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ChevronRight, BookOpen } from "lucide-react";
 
 export function QuranContinue() {
@@ -5,10 +6,14 @@ export function QuranContinue() {
     <section className="mt-6 px-5">
       <div className="mb-3 flex items-baseline justify-between">
         <h3 className="text-base font-semibold text-text-primary">Al-Quran</h3>
-        <button className="text-xs font-medium text-primary-900">Lihat semua</button>
+        <Link to="/quran" className="text-xs font-medium text-primary-900">
+          Lihat semua
+        </Link>
       </div>
 
-      <button
+      <Link
+        to="/quran/$surahId"
+        params={{ surahId: "2" }}
         className="flex w-full items-center gap-3 rounded-card border border-border bg-card p-4 text-left press"
         style={{ boxShadow: "var(--shadow-soft)" }}
       >
@@ -25,7 +30,7 @@ export function QuranContinue() {
           <div className="text-xs text-text-secondary">Juz 2 · Halaman 28</div>
         </div>
         <ChevronRight className="h-5 w-5 text-text-muted" />
-      </button>
+      </Link>
 
       <div className="mt-3 rounded-card border border-border bg-card p-4">
         <div className="text-[11px] font-semibold uppercase tracking-wider text-text-muted">

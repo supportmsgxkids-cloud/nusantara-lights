@@ -16,6 +16,7 @@ const titles: Record<string, string> = {
   "/sosial": "Sosial",
   "/profil": "Profil",
   "/tasbih": "Tasbih Digital",
+  "/quran": "Al-Quran",
 };
 
 function AppLayout() {
@@ -26,7 +27,9 @@ function AppLayout() {
     if (!getFlag(KEYS.authed)) navigate({ to: "/login", replace: true });
   }, [navigate]);
 
-  const title = titles[pathname] ?? "Nusantara Edu";
+  const title = pathname.startsWith("/quran/")
+    ? "Al-Quran"
+    : (titles[pathname] ?? "Nusantara Edu");
 
   return (
     <div className="min-h-screen bg-surface">
