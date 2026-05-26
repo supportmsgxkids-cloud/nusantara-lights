@@ -16,6 +16,7 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AiUstadzRouteImport } from './routes/ai-ustadz'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppTasbihRouteImport } from './routes/_app/tasbih'
 import { Route as AppSosialRouteImport } from './routes/_app/sosial'
 import { Route as AppProfilRouteImport } from './routes/_app/profil'
 import { Route as AppIlmuRouteImport } from './routes/_app/ilmu'
@@ -56,6 +57,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppTasbihRoute = AppTasbihRouteImport.update({
+  id: '/tasbih',
+  path: '/tasbih',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppSosialRoute = AppSosialRouteImport.update({
   id: '/sosial',
   path: '/sosial',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/ilmu': typeof AppIlmuRoute
   '/profil': typeof AppProfilRoute
   '/sosial': typeof AppSosialRoute
+  '/tasbih': typeof AppTasbihRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/ilmu': typeof AppIlmuRoute
   '/profil': typeof AppProfilRoute
   '/sosial': typeof AppSosialRoute
+  '/tasbih': typeof AppTasbihRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/_app/ilmu': typeof AppIlmuRoute
   '/_app/profil': typeof AppProfilRoute
   '/_app/sosial': typeof AppSosialRoute
+  '/_app/tasbih': typeof AppTasbihRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/ilmu'
     | '/profil'
     | '/sosial'
+    | '/tasbih'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -150,6 +160,7 @@ export interface FileRouteTypes {
     | '/ilmu'
     | '/profil'
     | '/sosial'
+    | '/tasbih'
   id:
     | '__root__'
     | '/'
@@ -164,6 +175,7 @@ export interface FileRouteTypes {
     | '/_app/ilmu'
     | '/_app/profil'
     | '/_app/sosial'
+    | '/_app/tasbih'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -227,6 +239,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/tasbih': {
+      id: '/_app/tasbih'
+      path: '/tasbih'
+      fullPath: '/tasbih'
+      preLoaderRoute: typeof AppTasbihRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/sosial': {
       id: '/_app/sosial'
       path: '/sosial'
@@ -271,6 +290,7 @@ interface AppRouteChildren {
   AppIlmuRoute: typeof AppIlmuRoute
   AppProfilRoute: typeof AppProfilRoute
   AppSosialRoute: typeof AppSosialRoute
+  AppTasbihRoute: typeof AppTasbihRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -279,6 +299,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppIlmuRoute: AppIlmuRoute,
   AppProfilRoute: AppProfilRoute,
   AppSosialRoute: AppSosialRoute,
+  AppTasbihRoute: AppTasbihRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

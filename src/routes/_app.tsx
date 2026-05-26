@@ -15,6 +15,7 @@ const titles: Record<string, string> = {
   "/ibadah": "Ibadah",
   "/sosial": "Sosial",
   "/profil": "Profil",
+  "/tasbih": "Tasbih Digital",
 };
 
 function AppLayout() {
