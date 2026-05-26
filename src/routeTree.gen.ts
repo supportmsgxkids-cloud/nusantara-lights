@@ -22,6 +22,8 @@ import { Route as AppProfilRouteImport } from './routes/_app/profil'
 import { Route as AppIlmuRouteImport } from './routes/_app/ilmu'
 import { Route as AppIbadahRouteImport } from './routes/_app/ibadah'
 import { Route as AppHomeRouteImport } from './routes/_app/home'
+import { Route as AppQuranIndexRouteImport } from './routes/_app/quran.index'
+import { Route as AppQuranSurahIdRouteImport } from './routes/_app/quran.$surahId'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -87,6 +89,16 @@ const AppHomeRoute = AppHomeRouteImport.update({
   path: '/home',
   getParentRoute: () => AppRoute,
 } as any)
+const AppQuranIndexRoute = AppQuranIndexRouteImport.update({
+  id: '/quran/',
+  path: '/quran/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppQuranSurahIdRoute = AppQuranSurahIdRouteImport.update({
+  id: '/quran/$surahId',
+  path: '/quran/$surahId',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -101,6 +113,8 @@ export interface FileRoutesByFullPath {
   '/profil': typeof AppProfilRoute
   '/sosial': typeof AppSosialRoute
   '/tasbih': typeof AppTasbihRoute
+  '/quran/$surahId': typeof AppQuranSurahIdRoute
+  '/quran/': typeof AppQuranIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -115,6 +129,8 @@ export interface FileRoutesByTo {
   '/profil': typeof AppProfilRoute
   '/sosial': typeof AppSosialRoute
   '/tasbih': typeof AppTasbihRoute
+  '/quran/$surahId': typeof AppQuranSurahIdRoute
+  '/quran': typeof AppQuranIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -131,6 +147,8 @@ export interface FileRoutesById {
   '/_app/profil': typeof AppProfilRoute
   '/_app/sosial': typeof AppSosialRoute
   '/_app/tasbih': typeof AppTasbihRoute
+  '/_app/quran/$surahId': typeof AppQuranSurahIdRoute
+  '/_app/quran/': typeof AppQuranIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -147,6 +165,8 @@ export interface FileRouteTypes {
     | '/profil'
     | '/sosial'
     | '/tasbih'
+    | '/quran/$surahId'
+    | '/quran/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -161,6 +181,8 @@ export interface FileRouteTypes {
     | '/profil'
     | '/sosial'
     | '/tasbih'
+    | '/quran/$surahId'
+    | '/quran'
   id:
     | '__root__'
     | '/'
@@ -176,6 +198,8 @@ export interface FileRouteTypes {
     | '/_app/profil'
     | '/_app/sosial'
     | '/_app/tasbih'
+    | '/_app/quran/$surahId'
+    | '/_app/quran/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -281,6 +305,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHomeRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/quran/': {
+      id: '/_app/quran/'
+      path: '/quran'
+      fullPath: '/quran/'
+      preLoaderRoute: typeof AppQuranIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/quran/$surahId': {
+      id: '/_app/quran/$surahId'
+      path: '/quran/$surahId'
+      fullPath: '/quran/$surahId'
+      preLoaderRoute: typeof AppQuranSurahIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -291,6 +329,8 @@ interface AppRouteChildren {
   AppProfilRoute: typeof AppProfilRoute
   AppSosialRoute: typeof AppSosialRoute
   AppTasbihRoute: typeof AppTasbihRoute
+  AppQuranSurahIdRoute: typeof AppQuranSurahIdRoute
+  AppQuranIndexRoute: typeof AppQuranIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -300,6 +340,8 @@ const AppRouteChildren: AppRouteChildren = {
   AppProfilRoute: AppProfilRoute,
   AppSosialRoute: AppSosialRoute,
   AppTasbihRoute: AppTasbihRoute,
+  AppQuranSurahIdRoute: AppQuranSurahIdRoute,
+  AppQuranIndexRoute: AppQuranIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -316,3 +358,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
