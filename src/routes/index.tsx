@@ -1,26 +1,24 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { KEYS, getFlag } from "@/lib/mock-auth";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: IndexRedirect,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function IndexRedirect() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    const onboarded = getFlag(KEYS.onboarded);
+    const authed = getFlag(KEYS.authed);
+    if (!onboarded) navigate({ to: "/onboarding", replace: true });
+    else if (!authed) navigate({ to: "/login", replace: true });
+    else navigate({ to: "/home", replace: true });
+  }, [navigate]);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="flex min-h-screen items-center justify-center bg-surface">
+      <div className="h-10 w-10 animate-pulse rounded-pill bg-primary-50" />
     </div>
   );
-}
-
-function Index() {
-  return <PlaceholderIndex />;
 }
