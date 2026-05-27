@@ -16,6 +16,7 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as AiUstadzRouteImport } from './routes/ai-ustadz'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiAiChatRouteImport } from './routes/api/ai-chat'
 import { Route as AppTasbihRouteImport } from './routes/_app/tasbih'
 import { Route as AppSosialRouteImport } from './routes/_app/sosial'
 import { Route as AppProfilRouteImport } from './routes/_app/profil'
@@ -57,6 +58,11 @@ const AppRoute = AppRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiChatRoute = ApiAiChatRouteImport.update({
+  id: '/api/ai-chat',
+  path: '/api/ai-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppTasbihRoute = AppTasbihRouteImport.update({
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/profil': typeof AppProfilRoute
   '/sosial': typeof AppSosialRoute
   '/tasbih': typeof AppTasbihRoute
+  '/api/ai-chat': typeof ApiAiChatRoute
   '/quran/$surahId': typeof AppQuranSurahIdRoute
   '/quran/': typeof AppQuranIndexRoute
 }
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/profil': typeof AppProfilRoute
   '/sosial': typeof AppSosialRoute
   '/tasbih': typeof AppTasbihRoute
+  '/api/ai-chat': typeof ApiAiChatRoute
   '/quran/$surahId': typeof AppQuranSurahIdRoute
   '/quran': typeof AppQuranIndexRoute
 }
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/_app/profil': typeof AppProfilRoute
   '/_app/sosial': typeof AppSosialRoute
   '/_app/tasbih': typeof AppTasbihRoute
+  '/api/ai-chat': typeof ApiAiChatRoute
   '/_app/quran/$surahId': typeof AppQuranSurahIdRoute
   '/_app/quran/': typeof AppQuranIndexRoute
 }
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/sosial'
     | '/tasbih'
+    | '/api/ai-chat'
     | '/quran/$surahId'
     | '/quran/'
   fileRoutesByTo: FileRoutesByTo
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/sosial'
     | '/tasbih'
+    | '/api/ai-chat'
     | '/quran/$surahId'
     | '/quran'
   id:
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/_app/profil'
     | '/_app/sosial'
     | '/_app/tasbih'
+    | '/api/ai-chat'
     | '/_app/quran/$surahId'
     | '/_app/quran/'
   fileRoutesById: FileRoutesById
@@ -210,6 +222,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
   RegisterRoute: typeof RegisterRoute
+  ApiAiChatRoute: typeof ApiAiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -261,6 +274,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai-chat': {
+      id: '/api/ai-chat'
+      path: '/api/ai-chat'
+      fullPath: '/api/ai-chat'
+      preLoaderRoute: typeof ApiAiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_app/tasbih': {
@@ -354,6 +374,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
   RegisterRoute: RegisterRoute,
+  ApiAiChatRoute: ApiAiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
