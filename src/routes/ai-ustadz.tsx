@@ -513,7 +513,7 @@ function Composer({
   send: (v: string) => void;
   stop: () => void;
   loading: boolean;
-  taRef: React.RefObject<HTMLTextAreaElement>;
+  taRef: React.RefObject<HTMLTextAreaElement | null>;
 }) {
   return (
     <div className="relative z-20 px-3 pb-4 pt-2">
