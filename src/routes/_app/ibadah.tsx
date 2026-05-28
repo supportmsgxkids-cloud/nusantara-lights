@@ -29,7 +29,7 @@ function IbadahPage() {
 
   return (
     <>
-      <div className="sticky top-[60px] z-30 glass border-b border-border">
+      <div className="sticky top-16 z-20 glass border-b border-border">
         <div className="no-scrollbar flex gap-1 overflow-x-auto px-5 py-2.5">
           {TABS.map((t) => (
             <button
