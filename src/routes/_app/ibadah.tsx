@@ -11,6 +11,7 @@ import { SholatStats } from "@/components/ibadah/SholatStats";
 import { PuasaPanel } from "@/components/ibadah/PuasaPanel";
 import { SahurIftarCard } from "@/components/ibadah/SahurIftarCard";
 import { HijriCalendar } from "@/components/ibadah/HijriCalendar";
+import { GoalsPanel } from "@/components/ibadah/GoalsPanel";
 
 export const Route = createFileRoute("/_app/ibadah")({
   component: IbadahPage,
@@ -20,6 +21,7 @@ const TABS = [
   { k: "hari", l: "Hari Ini" },
   { k: "sholat", l: "Sholat" },
   { k: "puasa", l: "Puasa" },
+  { k: "goal", l: "Goal" },
   { k: "kalender", l: "Kalender" },
 ] as const;
 type TabKey = (typeof TABS)[number]["k"];
@@ -71,6 +73,12 @@ function IbadahPage() {
         <>
           <PuasaPanel />
           <SahurIftarCard />
+        </>
+      )}
+
+      {tab === "goal" && (
+        <>
+          <GoalsPanel />
         </>
       )}
 
